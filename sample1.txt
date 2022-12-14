@@ -1,10 +1,4 @@
-# 드라이브로드 및 Connection 설정하기
 
-오라클과 이클립스를 연결 및 종료를 위한 클래스를 만든 뒤 getConnetcion 메소드를 만들어
-
-연결을 할때마다 메소드를 불러와 실행해 줍니다.
-
-## JDBC연결 메서드 만들기
 
 ```java
 public class DBConnecter {
