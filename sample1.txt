@@ -1,0 +1,45 @@
+# 드라이브로드 및 Connection 설정하기
+
+오라클과 이클립스를 연결 및 종료를 위한 클래스를 만든 뒤 getConnetcion 메소드를 만들어
+
+연결을 할때마다 메소드를 불러와 실행해 줍니다.
+
+## JDBC연결 메서드 만들기
+
+```java
+public class DBConnecter {
+	public static Connection getConnection() {
+		Connection conn=null;
+		
+		String url="jdbc:oracle:thin:@localhost:1521:XE";
+		String user="hr";
+		String pw="hr";
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			conn=DriverManager.getConnection(url,user,pw);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();	
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return conn;
+	}
+}
+```
+
+1. **URL**
+    1.  DB의 위치를 알려준다.
+2. **USER**
+    1.  오라클 계정명
+3. **PW**
+    1.  비밀번호를 입력해주면 된다.
+4. `Class.forName("oracle.jdbc.driver.OracleDriver");`
+    1. 클래스를 찾겠다는 의미이며, 클래스를 찾음과 동시에 클래스를 로드하여 프로그램 시작 전에 이 클래스를 메모리에 로드합니다.
+    2. driver변수로 따로 빼서 넣어줘도됨 ex) `driver="oracle.jdbc.driver.OracleDriver";`
+5. **Connection (인터페이스)**
+    1. Connection은 인터페이스로 애플리케이션과 DB 즉, 오라클과 연결하는 다리 역할을 합니다.
+6. `DriverManager.getConnection(url,user,pw)`
+    1. DriverManager 클래스의 메소드인 getConnection메소드는 인자값url,user,pw 총 세개를 받습니다.
+    2. 인자값으로 받아오면 db의 위치,sql계정,비밀번호를 입력하고 통로를 만드는 역할을 합니다.
